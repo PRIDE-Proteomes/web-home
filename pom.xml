@@ -44,7 +44,8 @@
     </properties>
 
     <build>
-        <finalName>${artifactId}-${version}-${version.extension}</finalName>
+        <!--<finalName>${artifactId}-${version}-${version.extension}</finalName>-->
+        <finalName>${artifactId}-${version}</finalName>
         <resources>
             <!-- filter only the properties files! -->
             <resource>
