@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>uk.ac.ebi.pride.maven</groupId>
+        <artifactId>pride-base-master</artifactId>
+        <version>1.0.2</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>uk.ac.ebi.pride.proteomes</groupId>
+    <artifactId>pride-proteomes-web-home</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <!-- to build this project profiles are needed!
+         Properties to configure the SOLR server and the WGC template service
+         Example build command:
+         mvn -P proteomes-web-prod clean package
+     -->
+    <name>PRIDE Proteomes Web Home</name>
+    <description>This package contains the web home for the PRIDE Proteomes project.</description>
+    <url>http://www.ebi.ac.uk/pride</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:svn:https://svn.ebi.ac.uk/pride-repo/pride-proteomes/web-home/trunk/</connection>
+        <developerConnection>scm:svn:https://svn.ebi.ac.uk/pride-repo/pride-proteomes/web-home/trunk/
+        </developerConnection>
+        <url>https://svn.ebi.ac.uk/pride-repo/pride-proteomes/web-home/</url>
+    </scm>
+
+    <properties>
+        <proteomes.search.version>1.0.0</proteomes.search.version>
+        <pride.web.utils.version>1.3.9</pride.web.utils.version>
+        <google.chart.version>1.3</google.chart.version>
+    </properties>
+
+    <build>
+        <finalName>${artifactId}-${version}-${version.extension}</finalName>
+        <resources>
+            <!-- filter only the properties files! -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>META-INF/props/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>META-INF/props/*.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <configuration>
+                    <webAppConfig>
+                        <!-- Note: the local deployment path has to be / or the proxy servlets won't work properly -->
+                        <contextPath>/</contextPath>
+                    </webAppConfig>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>9092</port>
+                        </connector>
+                    </connectors>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
+    <dependencies>
+
+        <!-- PRIDE Proteomes search -->
+        <dependency>
+            <groupId>uk.ac.ebi.pride.proteomes</groupId>
+            <artifactId>pride-proteomes-search</artifactId>
+            <version>${proteomes.search.version}</version>
+        </dependency>
+
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <!-- Spring test-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+
+        <!-- PRIDE web utilities-->
+        <dependency>
+            <groupId>uk.ac.ebi.pride.web</groupId>
+            <artifactId>pride-web-utils</artifactId>
+            <version>${pride.web.utils.version}</version>
+        </dependency>
+
+        <!-- Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
+        <!-- json -->
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+    </dependencies>
+
+    <repositories>
+        <!-- EBI repo -->
+        <repository>
+            <id>nexus-ebi-repo</id>
+            <name>The EBI internal repository</name>
+            <url>http://www.ebi.ac.uk/intact/maven/nexus/content/repositories/ebi-repo/</url>
+            <releases>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+</project>

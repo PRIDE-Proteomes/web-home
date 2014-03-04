@@ -1,0 +1,50 @@
+a.selected {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.remove-filter-button {
+    position:absolute;
+    right:20px;
+}
+
+.no-padding {
+    padding : 0px 0px 0px 0px;
+}
+
+.list-style-none li {
+    list-style-type: none;
+}
+
+.search-menu {
+    /*background-color: #E8E8E8;*/
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /*border-bottom: 1px solid #c0c0c0;*/
+}
+
+.search-menu-right-align{
+    /*background-color: #E8E8E8;*/
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /*border-bottom: 1px solid #c0c0c0;*/
+    text-align: right;
+}
+
+.search-menu li {
+    display: inline;
+}
+
+.search-menu a {
+    width: 20px;
+}
+
+.search-menu-right-align li {
+    display: inline;
+}
+
+.search-menu-right-align a {
+    width: 20px;
+}

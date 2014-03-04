@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Enables the Spring MVC @Controller programming model -->
+    <annotation-driven />
+
+    <!-- Scan for Controllers -->
+    <context:component-scan base-package="uk.ac.ebi.pride.proteomes.web.home.welcome.controller" />
+    <context:component-scan base-package="uk.ac.ebi.pride.proteomes.web.home.search.controller" />
+
+    <!-- property files -->
+    <context:property-placeholder location="classpath:META-INF/props/web.properties" ignore-unresolvable="true"/>
+
+    <resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
+
+    <!-- Resolves messages to support internationalization -->
+    <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <beans:property name="basename" value="/WEB-INF/messages/global" />
+    </beans:bean>
+
+    <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property name="prefix" value="/WEB-INF/views/" />
+        <beans:property name="suffix" value=".jsp" />
+    </beans:bean>
+
+
+    <beans:bean id="homeFrontierTemplateFilter" class="uk.ac.ebi.pride.web.util.frontier.CustomizedFrontierTemplateFilter">
+        <beans:property name="templateServiceAddress" value="${frontier.template.service.url}"/>
+        <beans:property name="jsonConfig" value="classpath:META-INF/webconfig/home.json"/>
+        <beans:property name="exceptions">
+            <beans:list>
+                <beans:value>/resources/</beans:value>
+                <beans:value>/statistics</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="browseFrontierTemplateFilter" class="uk.ac.ebi.pride.web.util.frontier.CustomizedFrontierTemplateFilter">
+         <beans:property name="templateServiceAddress" value="${frontier.template.service.url}"/>
+         <beans:property name="jsonConfig" value="classpath:META-INF/webconfig/search.json"/>
+         <beans:property name="exceptions">
+             <beans:list>
+                 <beans:value>/resources/</beans:value>
+                 <beans:value>/statistics</beans:value>
+             </beans:list>
+         </beans:property>
+     </beans:bean>
+
+</beans:beans>
