@@ -30,19 +30,19 @@
             "btnText": "Search",
             "action": "search",
             "method": "get",
-            "inputName": "q",
+            "inputName": "query",
             "examples": [
                 {
                     "title": "albumin",
-                    "href": "search?q=albumin"
+                    "href": "search?query=albumin"
                 },
                 {
                     "title": "P02768",
-                    "href": "search?q=P02768"
+                    "href": "search?query=P02768"
                 },
                 {
                     "title": "kinase",
-                    "href": "search?q=kinase"
+                    "href": "search?query=kinase"
                 }
             ]
         },

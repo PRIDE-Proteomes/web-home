@@ -9,7 +9,7 @@ a.selected {
 }
 
 .no-padding {
-    padding : 0px 0px 0px 0px;
+    padding : 0 0 0 0;
 }
 
 .list-style-none li {
@@ -48,3 +48,91 @@ a.selected {
 .search-menu-right-align a {
     width: 20px;
 }
+
+/** Paginator styles **/
+
+.col_pager {
+    font-weight: normal;
+    vertical-align: bottom;
+    white-space: nowrap;
+    /*background-color: #EEEEEE;*/
+    background-color: #b7dddd;
+    font-size: 100%;
+    padding: 3px;
+    margin-bottom: 1px;
+
+}
+
+.col_pager div {
+    /*color: #487676;*/
+    /*color: white;*/
+    color: #4b4a4a;
+    text-shadow: #ddf 1px 1px 0;
+    font-weight: bold;
+}
+
+.col_pager a {
+    padding: 2px 3px 0 3px;
+    margin: 0 2px;
+    /*color: #487676;*/
+    /*color: white;*/
+    /*color: #4b4a4a;*/
+    /*text-shadow: #ddf 1px 1px 0;*/
+    /*font-weight: bold;*/
+
+}
+
+
+.col_pager a:link,
+.col_pager a:visited {
+}
+
+.col_pager a:hover,
+.col_pager a:focus,
+.col_pager a:active {
+    padding: 2px 3px;
+    margin: 0 2px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-bottom: 0 none;
+    background-color: #4b4e6b;
+    color: #FFF;
+}
+
+.col_pager span {
+    padding: 2px 3px;
+    margin: 0 2px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background-color: #e0f4ec;
+    color: #4b4a4a;
+    text-shadow: #ddf 1px 1px 0;
+    font-weight: bold;
+}
+
+
+.pr-stats {
+    position: relative;
+    text-align: center;
+    pointer-events: none;
+    margin: 0;
+}
+
+.pr-pager {
+    float: left;
+    text-align: left;
+}
+
+.pr-page-size {
+    float: right;
+    text-align: right;
+}
+
+.pr-pager,
+.pr-page-size {
+    width: 33%;
+}
+
+/** End of Paginator styles **/
