@@ -119,6 +119,7 @@
     <filter-mapping>
         <filter-name>browseFrontierTemplateFilter</filter-name>
         <url-pattern>/search/*</url-pattern>
+        <url-pattern>/proteins/*</url-pattern>
     </filter-mapping>
 
 </web-app>

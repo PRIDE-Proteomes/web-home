@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="customElement" tagdir="/WEB-INF/tags/elements"%>
 
+<%@ attribute name="baseUrl" required="false" type="java.lang.String" %> <%-- base URL to use if not the search --%>
 <%@ attribute name="page" required="true" type="org.springframework.data.domain.Page" %>
 <%@ attribute name="query" required="false" type="java.lang.String" %>
 <%@ attribute name="speciesFilters" required="false" type="java.util.Collection" %>
@@ -15,7 +16,7 @@
             <%-- 1 based page number to be displayed on web page --%>
             <c:set var="myPage" value="${page.number + 1}"/>
 
-            <c:if test="${page.numberOfElements gt 0}">
+            <c:if test="${page.totalElements gt 0}">
                 <c:if test="${page.totalPages gt 1}">
                     <fmt:message key="search.page"/>
                     <c:choose>
@@ -23,7 +24,7 @@
                             <span>1</span>
                         </c:when>
                         <c:otherwise>
-                            <customElement:hrefSearch label="1" qt="${query}" ps="${page.size}" pn="${0}" so="${page.sort}" speciesFilter="${speciesFilters}"/>
+                            <customElement:hrefSearch baseUrl="${baseUrl}" label="1" qt="${query}" ps="${page.size}" pn="${0}" so="${page.sort}" speciesFilter="${speciesFilters}"/>
                         </c:otherwise>
                     </c:choose>
                 </c:if>
@@ -51,7 +52,7 @@
                                 <span>${nPage}</span>
                             </c:when>
                             <c:otherwise>
-                                <customElement:hrefSearch label="${nPage}" qt="${query}" ps="${page.size}" pn="${nPage-1}" so="${page.sort}" speciesFilter="${speciesFilters}"/>
+                                <customElement:hrefSearch baseUrl="${baseUrl}" label="${nPage}" qt="${query}" ps="${page.size}" pn="${nPage-1}" so="${page.sort}" speciesFilter="${speciesFilters}"/>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
@@ -65,7 +66,7 @@
                             <span>${page.totalPages}</span>
                         </c:when>
                         <c:otherwise>
-                            <customElement:hrefSearch label="${page.totalPages}" qt="${query}" ps="${page.size}" pn="${page.totalPages-1}" so="${page.sort}" speciesFilter="${speciesFilters}"/>
+                            <customElement:hrefSearch baseUrl="${baseUrl}" label="${page.totalPages}" qt="${query}" ps="${page.size}" pn="${page.totalPages-1}" so="${page.sort}" speciesFilter="${speciesFilters}"/>
                         </c:otherwise>
                     </c:choose>
 
@@ -81,7 +82,7 @@
                         <span>10</span>
                     </c:when>
                     <c:otherwise>
-                        <customElement:hrefSearch label="10" qt="${query}" ps="10" pn="0" so="${page.sort}" speciesFilter="${speciesFilters}"/>
+                        <customElement:hrefSearch baseUrl="${baseUrl}" label="10" qt="${query}" ps="10" pn="0" so="${page.sort}" speciesFilter="${speciesFilters}"/>
                     </c:otherwise>
                 </c:choose>
             </c:if>
@@ -92,7 +93,7 @@
                         <span>20</span>
                     </c:when>
                     <c:otherwise>
-                        <customElement:hrefSearch label="20" qt="${query}" ps="20" pn="0" so="${page.sort}" speciesFilter="${speciesFilters}"/>
+                        <customElement:hrefSearch baseUrl="${baseUrl}" label="20" qt="${query}" ps="20" pn="0" so="${page.sort}" speciesFilter="${speciesFilters}"/>
                     </c:otherwise>
                 </c:choose>
             </c:if>
@@ -103,7 +104,7 @@
                         <span>50</span>
                     </c:when>
                     <c:otherwise>
-                        <customElement:hrefSearch label="50" qt="${query}" ps="50" pn="0" so="${page.sort}" speciesFilter="${speciesFilters}"/>
+                        <customElement:hrefSearch baseUrl="${baseUrl}" label="50" qt="${query}" ps="50" pn="0" so="${page.sort}" speciesFilter="${speciesFilters}"/>
                     </c:otherwise>
                 </c:choose>
             </c:if>
@@ -114,7 +115,7 @@
                         <span>100</span>
                     </c:when>
                     <c:otherwise>
-                        <customElement:hrefSearch label="100" qt="${query}" ps="100" pn="" so="${page.sort}" speciesFilter="${speciesFilters}"/>
+                        <customElement:hrefSearch baseUrl="${baseUrl}" label="100" qt="${query}" ps="100" pn="" so="${page.sort}" speciesFilter="${speciesFilters}"/>
                     </c:otherwise>
                 </c:choose>
             </c:if>

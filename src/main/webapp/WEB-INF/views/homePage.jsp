@@ -22,56 +22,56 @@
             <fmt:message key="welcome.browse.proteomes.caption"/>
         </h3>
 
-        <div class="row">
-             <span class="icon icon-species" data-icon="H">
-                 <fmt:message key="human.proteome.name"/>
-             </span>
-            (
-            <span class="latin-species">
-                <fmt:message key="human.latin.proteome.name"/>
+        <div>
+            <fmt:message key="human.latin.proteome.name" var="human_title"/>
+            <span class="icon icon-species" data-icon="H" title="${human_title}">
+                <fmt:message key="human.proteome.name"/>
             </span>
-            )
-            <c:url var="browse_human_url" value="search?q=&newSpeciesFilter=9606"/>
-            <a href="${browse_human_url}">Browse</a>
+
+            <c:url var="peptiform_url" value="search?q=&speciesFilter=9606"/>
+            <a href="${peptiform_url}" style="border-bottom-style: none" class="icon icon-conceptual" data-icon="b" title="Peptiforms"></a>
+
+            <c:url var="protein_url" value="proteins?speciesFilter=9606"/>
+            <a href="${protein_url}" style="border-bottom-style: none" class="icon icon-conceptual" data-icon="P" title="Proteins"></a>
         </div>
 
-        <div class="row">
-            <span class="icon icon-species" data-icon="M">
+        <div>
+            <fmt:message key="mouse.latin.proteome.name" var="mouse_title"/>
+            <span class="icon icon-species" data-icon="M" title="${mouse_title}">
                 <fmt:message key="mouse.proteome.name"/>
             </span>
-            (
-            <span class="latin-species">
-                <fmt:message key="mouse.latin.proteome.name"/>
-            </span>
-            )
-            <c:url var="browse_mouse_url" value="search?q=&newSpeciesFilter=10090"/>
-            <a href="${browse_mouse_url}">Browse</a>
+
+            <c:url var="peptiform_url" value="search?q=&speciesFilter=10090"/>
+            <a href="${peptiform_url}" style="border-bottom-style: none" class="icon icon-conceptual" data-icon="b" title="Peptiforms"></a>
+
+            <c:url var="protein_url" value="proteins?speciesFilter=10090"/>
+            <a href="${protein_url}" style="border-bottom-style: none" class="icon icon-conceptual" data-icon="P" title="Proteins"></a>
         </div>
 
-        <div class="row">
-            <span class="icon icon-species" data-icon="R">
+        <div>
+            <fmt:message key="rat.latin.proteome.name" var="rat_title"/>
+            <span class="icon icon-species" data-icon="R" title="${rat_title}">
                 <fmt:message key="rat.proteome.name"/>
             </span>
-            (
-            <span class="latin-species">
-                <fmt:message key="rat.latin.proteome.name"/>
-            </span>
-            )
-            <c:url var="browse_rat_url" value="search?q=&newSpeciesFilter=10116"/>
-            <a href="${browse_rat_url}">Browse</a>
+
+            <c:url var="peptiform_url" value="search?q=&speciesFilter=10116"/>
+            <a href="${peptiform_url}" style="border-bottom-style: none" class="icon icon-conceptual" data-icon="b" title="Peptiforms"></a>
+
+            <c:url var="protein_url" value="proteins?speciesFilter=10116"/>
+            <a href="${protein_url}" style="border-bottom-style: none" class="icon icon-conceptual" data-icon="P" title="Proteins"></a>
         </div>
 
-        <div class="row">
-            <span class="icon icon-species" data-icon="P">
+        <div>
+            <fmt:message key="arabidopsis.latin.proteome.name" var="cress_title"/>
+            <span class="icon icon-species" data-icon="P" title="${cress_title}">
                 <fmt:message key="arabidopsis.proteome.name"/>
             </span>
-            (
-            <span class="latin-species">
-                <fmt:message key="arabidopsis.latin.proteome.name"/>
-            </span>
-            )
-            <c:url var="browse_arabidopsis_url" value="search?q=&newSpeciesFilter=3702"/>
-            <a href="${browse_arabidopsis_url}">Browse</a>
+
+            <c:url var="peptiform_url" value="search?q=&speciesFilter=3702"/>
+            <a href="${peptiform_url}" style="border-bottom-style: none" class="icon icon-conceptual" data-icon="b" title="Peptiforms"></a>
+
+            <c:url var="protein_url" value="proteins?speciesFilter=3702"/>
+            <a href="${protein_url}" style="border-bottom-style: none" class="icon icon-conceptual" data-icon="P" title="Proteins"></a>
         </div>
 
     </section>
