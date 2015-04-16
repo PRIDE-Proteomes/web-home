@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -27,7 +26,7 @@
   <div id="result-count" class="grid_18 alpha clearfix">
     <h3>
       <strong>${facetPage.totalElements}</strong>
-      <fmt:message key="proteins.page.results.header"/>
+      Proteins
       <c:if test="${numFilters==1}"> (1 filter applied)</c:if>
       <c:if test="${numFilters>1}"> (${numFilters} filters applied)</c:if>
     </h3>
@@ -37,7 +36,6 @@
   <%-- If we have no results we show a statement
        and we add an invisible div, which used by some JS to set a defined class for the global EBI search to use --%>
   <c:if test="${empty proteinFacets}">
-    <h4><fmt:message key="search.result.empty"/></h4>
     <div style="visibility: hidden" id="noresults"></div>
   </c:if>
 
