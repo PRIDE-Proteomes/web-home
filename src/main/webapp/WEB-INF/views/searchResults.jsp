@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="customElement" tagdir="/WEB-INF/tags/elements" %>
 
-<c:set var="proteinFacets" value="${peptiformPage.content}"/>
+<c:set var="peptiformFacets" value="${peptiformPage.content}"/>
 <c:set var="size" value="${peptiformPage.size}"/>
 
 <div id="search-result">
@@ -52,7 +52,7 @@
 
     <%-- If we have no results we show a statement
          and we add an invisible div, which used by some JS to set a defined class for the global EBI search to use --%>
-    <c:if test="${empty proteinFacets}">
+    <c:if test="${empty peptiformFacets}">
         <h4><fmt:message key="search.result.empty"/></h4>
         <div style="visibility: hidden" id="noresults"></div>
     </c:if>
@@ -63,9 +63,9 @@
         <%-- Filters --%>
         <div class="grid_4 left-column">
             <h4>Filter results</h4>
-            <spring:url var="proteinsUrl" value="/search"/>
+            <spring:url var="peptiformsUrl" value="/search"/>
             <%-- ADD filter form --%>
-            <form action="${proteinsUrl}" method="get">
+            <form action="${peptiformsUrl}" method="get">
                 <fieldset class="no-padding">
                     <customElement:inputDefaultParams query="${query}"  pn="0" ps="${peptiformPage.size}" sort="${peptiformPage.sort}"/>
 
@@ -88,7 +88,7 @@
             <c:if test="${numFilters>0}">
                 <h4>Current active filters</h4>
                 <%-- Remove all filters --%>
-                <form action="${proteinsUrl}" method="get">
+                <form action="${peptiformsUrl}" method="get">
                     <fieldset>
                         <customElement:inputDefaultParams query="${query}"  pn="0" ps="${peptiformPage.size}" sort="${peptiformPage.sort}"/>
                             <%-- E.g. submit again with the query term, but without any filters --%>
@@ -100,7 +100,7 @@
                 <c:if test="${not empty speciesFilters}">
                     Species:
                     <c:forEach var="appliedSpeciesFilter" items="${speciesFilters}">
-                        <form action="${proteinsUrl}" method="get">
+                        <form action="${peptiformsUrl}" method="get">
                             <fieldset>
                                 <customElement:inputDefaultParams query="${query}" pn="0" ps="${peptiformPage.size}" sort="${peptiformPage.sort}"/>
                                 <customElement:inputHiddenListExcluding items="${speciesFilters}" name="speciesFilter" excludeItem="${appliedSpeciesFilter}"/>
@@ -125,7 +125,7 @@
 
 
         <%-- List of peptiforms --%>
-        <c:if test="${not empty proteinFacets}">
+        <c:if test="${not empty peptiformFacets}">
             <%-- Table and controls --%>
 
             <div id="search-result-table" class="grid_20 omega">
@@ -163,33 +163,33 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="proteinFacet" items="${proteinFacets}">
+                    <c:forEach var="peptiformFacet" items="${peptiformFacets}">
                         <tr>
                             <%--<td>--%>
                                     <%--${peptiform.id}--%>
                             <%--</td>--%>
                             <td>
-                                    ${proteinFacet.sequence}
+                                    ${peptiformFacet.sequence}
                             </td>
                             <td>
-                                <c:forEach var="modi" items="${proteinFacet.mods}">
+                                <c:forEach var="modi" items="${peptiformFacet.mods}">
                                     ${modi}
                                 </c:forEach>
                             </td>
                             <td>
-                                    ${proteinFacet.species}
+                                    ${peptiformFacet.species}
                             </td>
                             <td>
-                                <c:forEach var="protein" items="${proteinFacet.proteins}">
+                                <c:forEach var="protein" items="${peptiformFacet.proteins}">
                                     <spring:url var="showUrlPeptide" value="/viewer/#protein={protein_accession}&peptide={peptide_sequence}">
                                         <spring:param name="protein_accession" value="${protein}" />
-                                        <spring:param name="peptide_sequence" value="${proteinFacet.sequence}" />
+                                        <spring:param name="peptide_sequence" value="${peptiformFacet.sequence}" />
                                     </spring:url>
                                     <a href="${showUrlPeptide}">${protein}</a>
                                 </c:forEach>
                             </td>
                             <td>
-                                <c:forEach var="upGroup" items="${proteinFacet.upGroups}">
+                                <c:forEach var="upGroup" items="${peptiformFacet.upGroups}">
                                     <spring:url var="showUrlPeptide" value="/viewer/#group={group}">
                                         <spring:param name="group" value="${upGroup}" />
                                     </spring:url>
