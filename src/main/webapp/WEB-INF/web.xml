@@ -120,6 +120,8 @@
         <filter-name>browseFrontierTemplateFilter</filter-name>
         <url-pattern>/search/*</url-pattern>
         <url-pattern>/proteins/*</url-pattern>
+        <url-pattern>/upgroups/*</url-pattern>
+        <url-pattern>/genes/*</url-pattern>
     </filter-mapping>
 
 </web-app>
