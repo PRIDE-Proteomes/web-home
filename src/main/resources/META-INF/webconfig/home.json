@@ -4,23 +4,14 @@
         "bodyMaxWidth": 1050,
         "cssList": [
             {
-                "url": "resources/css/proteomes.css"
+                "url": "${deploy.url}resources/css/proteomes.css"
             }
         ],
         "javascriptList": [
-            {
-                "url": "https://www.google.com/jsapi"
-            },
-            {
-                "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
-            },
-            {
-                "url": "resources/js/stats.js"
-            }
         ] ,
         "breadcrumbItems": [{
             "title": "PRIDE",
-            "href": "../"
+            "href": "http://www.ebi.ac.uk/pride"
         },{
             "title": "PRIDE Proteomes"
         }]
@@ -29,21 +20,21 @@
         "title": "PRIDE Proteomes",
         "search": {
             "btnText": "Search",
-            "action": "search",
+            "action": "${deploy.url}search",
             "method": "get",
             "inputName": "query",
             "examples": [
                 {
                     "title": "albumin",
-                    "href": "search?query=albumin"
+                    "href": "${deploy.url}search?query=albumin"
                 },
                 {
                     "title": "P02768",
-                    "href": "search?query=P02768"
+                    "href": "${deploy.url}search?query=P02768"
                 },
                 {
                     "title": "kinase",
-                    "href": "search?query=kinase"
+                    "href": "${deploy.url}search?query=kinase"
                 }
             ]
         },
@@ -51,14 +42,20 @@
             {
                 "selected": true,
                 "title": "Home",
-                "href": "./",
+                "href": "${deploy.url}",
                 "tooltip": "Home page"
             },
             {
                 "selected": false,
                 "title": "Search",
-                "href": "search",
-                "tooltip": "Search PRIDE Proteomes data"
+                "href": "${deploy.url}search",
+                "tooltip": "Search peptiforms in PRIDE Proteomes"
+            },
+            {
+                "selected": false,
+                "title": "Browse",
+                "href": "${deploy.url}browse",
+                "tooltip": "Browse PRIDE Proteomes data"
             },
             {
                 "selected": false,

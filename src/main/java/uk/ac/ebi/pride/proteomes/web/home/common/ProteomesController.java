@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 public abstract class ProteomesController {
 
+    // NOTE: these have to be the same as in the custom JSP tags 'inputDefaultParams.tag' and 'hrefSearch.tag'
+    protected static final int PAGE_SIZE = 10;
+    protected static final int PAGE_NUMBER = 0;
+
+
     /**
      * Generic Exception Handler that catches an exception that is not explicitly handled otherwise.
      * NOTE: Response Status will be set to: INTERNAL_SERVER_ERROR(500, "Internal Server Error")

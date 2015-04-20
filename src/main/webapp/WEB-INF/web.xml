@@ -113,15 +113,21 @@
     </filter-mapping>
 
     <filter>
+        <filter-name>searchFrontierTemplateFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>searchFrontierTemplateFilter</filter-name>
+        <url-pattern>/search/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>browseFrontierTemplateFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>browseFrontierTemplateFilter</filter-name>
-        <url-pattern>/search/*</url-pattern>
-        <url-pattern>/proteins/*</url-pattern>
-        <url-pattern>/upgroups/*</url-pattern>
-        <url-pattern>/genes/*</url-pattern>
+        <url-pattern>/browse/*</url-pattern>
     </filter-mapping>
 
 </web-app>

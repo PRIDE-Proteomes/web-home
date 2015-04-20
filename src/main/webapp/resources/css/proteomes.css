@@ -136,3 +136,7 @@ a.selected {
 }
 
 /** End of Paginator styles **/
+
+.text-para {
+    text-align: justify;
+}

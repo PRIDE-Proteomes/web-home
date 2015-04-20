@@ -9,10 +9,13 @@
         ],
         "javascriptList": [
             {
+                "url": "https://www.google.com/jsapi"
+            },
+            {
                 "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
             },
             {
-                "url": "${deploy.url}resources/js/search.js"
+                "url": "${deploy.url}resources/js/stats.js"
             }
         ] ,
         "bottomJavascriptList": [
@@ -54,13 +57,13 @@
                 "tooltip": "Home page"
             },
             {
-                "selected": true,
+                "selected": false,
                 "title": "Search",
                 "href": "${deploy.url}search",
                 "tooltip": "Search peptiforms in PRIDE Proteomes"
             },
             {
-                "selected": false,
+                "selected": true,
                 "title": "Browse",
                 "href": "${deploy.url}browse",
                 "tooltip": "Browse PRIDE Proteomes data"

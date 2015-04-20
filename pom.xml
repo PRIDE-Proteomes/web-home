@@ -47,6 +47,7 @@
                 <filtering>true</filtering>
                 <includes>
                     <include>META-INF/props/*.properties</include>
+                    <include>META-INF/webconfig/*.json</include>
                 </includes>
             </resource>
             <resource>
@@ -54,6 +55,7 @@
                 <filtering>false</filtering>
                 <excludes>
                     <exclude>META-INF/props/*.properties</exclude>
+                    <exclude>META-INF/webconfig/*.json</exclude>
                 </excludes>
             </resource>
         </resources>

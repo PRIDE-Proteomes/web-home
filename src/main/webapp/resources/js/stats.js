@@ -80,11 +80,18 @@ function drawCharts2() {
 
     // Set bar chart options
     var materialOptions = {
-        chart: { title: "Proteomes data" },
+        chart: { title: "Browse PRIDE Proteome's data" },
         width: 800,
         height: 250,
-        vAxis:{ title: '' },
-        hAxis : { format: '###,###' },
+        vAxis: { title: '',
+                 textStyle: {color: 'black'}
+               },
+        hAxis: { format: '###,###',
+                 textStyle: {color: 'black'}
+               },
+        legend: {textStyle: {color: 'black'}
+                },
+        titleTextStyle: {color: 'black'},
         colors: ['#B2D1FF', '#FF9999', '#FFE680', '#99EBC2'],
         bars: 'horizontal'
     };
@@ -119,19 +126,19 @@ function myClickHandler(e){
             switch (item.column) {
                 case 1 :
                     message += "Peptiforms for " + taxid;
-                    window.location.assign("./search?speciesFilter="+taxid);
+                    window.location.assign("browse/peptiforms?speciesFilter="+taxid);
                     break;
                 case 2 :
                     message += "Proteins for " + taxid;
-                    window.location.assign("./proteins?speciesFilter="+taxid);
+                    window.location.assign("browse/proteins?speciesFilter="+taxid);
                     break;
                 case 3 :
                     message += "UP Groups for " + taxid;
-                    //window.location.assign("./upgroups?speciesFilter="+taxid);
+                    window.location.assign("browse/upgroups?speciesFilter="+taxid);
                     break;
                 case 4 :
                     message += "Genes for " + taxid;
-                    //window.location.assign("./genes?speciesFilter="+taxid);
+                    window.location.assign("browse/genes?speciesFilter="+taxid);
                     break;
                 default : message += "unknown data type";
             }
@@ -143,17 +150,19 @@ function myClickHandler(e){
             switch (item.column) {
                 case 1 :
                     message += "Peptiforms";
-                    window.location.assign("./search");
+                    window.location.assign("browse/peptiforms");
                     break;
                 case 2 :
                     message += "Proteins";
-                    window.location.assign("./proteins");
+                    window.location.assign("browse/proteins");
                     break;
                 case 3 :
                     message += "UP Groups";
+                    window.location.assign("browse/upgroups");
                     break;
                 case 4 :
                     message += "Genes";
+                    window.location.assign("browse/genes");
                     break;
                 default : message += "unknown data type";
             }

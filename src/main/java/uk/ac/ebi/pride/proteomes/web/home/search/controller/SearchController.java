@@ -31,9 +31,6 @@ import java.util.Set;
 @Controller
 public class SearchController extends ProteomesController {
 
-    // NOTE: these have to be the same as in the custom JSP tags 'inputDefaultParams.tag' and 'hrefSearch.tag'
-    private static final int PAGE_SIZE = 10;
-    private static final int PAGE_NUMBER = 0;
 
     @Autowired
     private ProteomesSearchService proteomesSearchService;
@@ -41,14 +38,20 @@ public class SearchController extends ProteomesController {
 
     @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public String search2(@RequestParam(value = "query", defaultValue = "")
-                          String query,
-                          @PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE)
-                          Pageable page,
-                          @RequestParam(value = "speciesFilter", defaultValue = "")
-                          int[] taxidFilter,
-                          Model model) {
+    public String search(@RequestParam(value = "query", defaultValue = "")
+                             String query,
+                         @PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE)
+                         Pageable page,
+                         @RequestParam(value = "speciesFilter", defaultValue = "")
+                         int[] taxidFilter,
+                         Model model) {
 
+        return doSearch(query, page, taxidFilter, model);
+    }
+
+    // Note: the search functionality is currently limited and is re-used in the
+    // peptiform browse option (BrowseController), hence the public method
+    public String doSearch(String query, Pageable page, int[] taxidFilter, Model model) {
         Set<Integer> selectedSpeciesFilters = null;
         Map<Integer, Long> availableSpeciesFilters = proteomesSearchService.getTaxidFacetsByQuery(query);
 
@@ -75,141 +78,6 @@ public class SearchController extends ProteomesController {
         model.addAttribute("availableSpeciesList", availableSpeciesFilters);
 
         return "searchResults";
-    }
-
-
-    @RequestMapping(value = {"/proteins"}, method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public String proteinBrowser(@PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE)
-                                 Pageable page,
-                                 @RequestParam(value = "speciesFilter", defaultValue = "")
-                                 int[] taxidFilter,
-                                 Model model) {
-
-
-        Set<Integer> selectedSpeciesFilters = null;
-        Map<Integer, Long> availableSpeciesFilters = proteomesSearchService.getTaxidFacets();
-
-        if (taxidFilter != null && taxidFilter.length > 0) {
-            selectedSpeciesFilters = new HashSet<Integer>(taxidFilter.length);
-            for (int speciesTaxId : taxidFilter) {
-                selectedSpeciesFilters.add(speciesTaxId);
-                // we remove the already selected option from the available filters, because if
-                // it's already selected, it doesn't make sense to present it again as an option
-                availableSpeciesFilters.remove(speciesTaxId);
-            }
-        }
-
-        Sort tempSort = null;
-        boolean sortByIndex = false;
-        // if the sort should be based on the index, we create a Sort accordingly,
-        // otherwise we stick with the default
-        if (page.getSort() != null && page.getSort().getOrderFor("index") != null) {
-            sortByIndex = true;
-            tempSort = new Sort(new Sort.Order(Sort.Direction.DESC, "index"));
-        }
-
-        Page<FacetFieldEntry> facetPage = proteomesSearchService.getProteinCountsBySpecies(selectedSpeciesFilters, page.getPageNumber(), page.getPageSize(), sortByIndex);
-
-
-        PageRequest pageRequest = new PageRequest(page.getPageNumber(), page.getPageSize(), tempSort);
-        SolrResultPage<FacetFieldEntry> resultPage = new SolrResultPage<FacetFieldEntry>(facetPage.getContent(), pageRequest, facetPage.getTotalElements(), 0.0f);
-
-        model.addAttribute("facetPage", resultPage);
-        model.addAttribute("speciesFilters", selectedSpeciesFilters);
-        model.addAttribute("availableSpeciesList", availableSpeciesFilters);
-
-        return "proteinListing";
-    }
-
-
-    @RequestMapping(value = {"/upgroups"}, method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public String upGroupBrowser(@PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE)
-                                 Pageable page,
-                                 @RequestParam(value = "speciesFilter", defaultValue = "")
-                                 int[] taxidFilter,
-                                 Model model) {
-
-
-        Set<Integer> selectedSpeciesFilters = null;
-        Map<Integer, Long> availableSpeciesFilters = proteomesSearchService.getTaxidFacets();
-
-        if (taxidFilter != null && taxidFilter.length > 0) {
-            selectedSpeciesFilters = new HashSet<Integer>(taxidFilter.length);
-            for (int speciesTaxId : taxidFilter) {
-                selectedSpeciesFilters.add(speciesTaxId);
-                // we remove the already selected option from the available filters, because if
-                // it's already selected, it doesn't make sense to present it again as an option
-                availableSpeciesFilters.remove(speciesTaxId);
-            }
-        }
-
-        Sort tempSort = null;
-        boolean sortByIndex = false;
-        // if the sort should be based on the index, we create a Sort accordingly,
-        // otherwise we stick with the default
-        if (page.getSort() != null && page.getSort().getOrderFor("index") != null) {
-            sortByIndex = true;
-            tempSort = new Sort(new Sort.Order(Sort.Direction.DESC, "index"));
-        }
-
-        Page<FacetFieldEntry> facetPage = proteomesSearchService.getUPGroupCountsBySpecies(selectedSpeciesFilters, page.getPageNumber(), page.getPageSize(), sortByIndex);
-
-
-        PageRequest pageRequest = new PageRequest(page.getPageNumber(), page.getPageSize(), tempSort);
-        SolrResultPage<FacetFieldEntry> resultPage = new SolrResultPage<FacetFieldEntry>(facetPage.getContent(), pageRequest, facetPage.getTotalElements(), 0.0f);
-
-        model.addAttribute("facetPage", resultPage);
-        model.addAttribute("speciesFilters", selectedSpeciesFilters);
-        model.addAttribute("availableSpeciesList", availableSpeciesFilters);
-
-        return "upgroupListing";
-    }
-
-
-    @RequestMapping(value = {"/genes"}, method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.OK)
-    public String geneBrowser(@PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE)
-                                 Pageable page,
-                                 @RequestParam(value = "speciesFilter", defaultValue = "")
-                                 int[] taxidFilter,
-                                 Model model) {
-
-
-        Set<Integer> selectedSpeciesFilters = null;
-        Map<Integer, Long> availableSpeciesFilters = proteomesSearchService.getTaxidFacets();
-
-        if (taxidFilter != null && taxidFilter.length > 0) {
-            selectedSpeciesFilters = new HashSet<Integer>(taxidFilter.length);
-            for (int speciesTaxId : taxidFilter) {
-                selectedSpeciesFilters.add(speciesTaxId);
-                // we remove the already selected option from the available filters, because if
-                // it's already selected, it doesn't make sense to present it again as an option
-                availableSpeciesFilters.remove(speciesTaxId);
-            }
-        }
-
-        Sort tempSort = null;
-        boolean sortByIndex = false;
-        // if the sort should be based on the index, we create a Sort accordingly,
-        // otherwise we stick with the default
-        if (page.getSort() != null && page.getSort().getOrderFor("index") != null) {
-            sortByIndex = true;
-            tempSort = new Sort(new Sort.Order(Sort.Direction.DESC, "index"));
-        }
-
-        Page<FacetFieldEntry> facetPage = proteomesSearchService.getGeneGroupCountsBySpecies(selectedSpeciesFilters, page.getPageNumber(), page.getPageSize(), sortByIndex);
-
-
-        PageRequest pageRequest = new PageRequest(page.getPageNumber(), page.getPageSize(), tempSort);
-        SolrResultPage<FacetFieldEntry> resultPage = new SolrResultPage<FacetFieldEntry>(facetPage.getContent(), pageRequest, facetPage.getTotalElements(), 0.0f);
-
-        model.addAttribute("facetPage", resultPage);
-        model.addAttribute("speciesFilters", selectedSpeciesFilters);
-        model.addAttribute("availableSpeciesList", availableSpeciesFilters);
-
-        return "geneListing";
     }
 
 }

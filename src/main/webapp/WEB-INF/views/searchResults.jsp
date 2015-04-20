@@ -18,7 +18,7 @@
                 <p>
                     <spring:url var="prideUrl" value="http://www.ebi.ac.uk/pride"/>
                     <spring:url var="proteomesUrl" value="/"/>
-                    <a href="${prideUrl}">PRIDE</a> &gt; <a href="${proteomesUrl}">PRIDE Proteomes</a> &gt; Search
+                    <a href="${prideUrl}">PRIDE</a> &gt; <a href="${proteomesUrl}">PRIDE Proteomes</a> &gt; Peptiforms
                 </p>
             </nav>
         </div>
