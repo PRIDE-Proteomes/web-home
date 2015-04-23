@@ -19,7 +19,7 @@
     </section>
 
     <section id="chart" class="grid_24 clearfix">
-        <div class="grid_20 prefix_2" id="bar_chart"></div>
+        <div class="grid_22 push_1" id="bar_chart"></div>
     </section>
 
     <section id="chart_desc" class="grid_22 prefix_1">
