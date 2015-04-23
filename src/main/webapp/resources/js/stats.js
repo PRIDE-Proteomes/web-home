@@ -51,6 +51,25 @@ var logging = false;
 
 var dataBarChart;
 var dataTable;
+// Set bar chart options
+var materialOptions = {
+    chart: { title: "Browse PRIDE Proteome's data" },
+    width: 900,
+    height: 400,
+    vAxis: { title: '',
+        textStyle: {color: 'black'}
+    },
+    hAxis: {
+        format: 'decimal',
+        //logScale: true, // does not work in material design charts (possible bug)
+        textStyle: {color: 'black'}
+    },
+    legend: {textStyle: {color: 'black'}
+    },
+    titleTextStyle: {color: 'black'},
+    colors: ['#B2D1FF', '#FF9999', '#FFE680', '#99EBC2'],
+    bars: 'horizontal'
+};
 
 function drawCharts2() {
 
@@ -64,41 +83,45 @@ function drawCharts2() {
     dataTable.addColumn('number', '# UP groups');
     dataTable.addColumn('number', '# genes');
 
-    //dataTable.addRow(['Human', 'Homo sapiens', 1000, 500, 400, 300]);
-    //dataTable.addRow(['Mouse', 'Mus musculus', 2000, 1000, 800, 700]);
-    //dataTable.addRow(['Rat', 'Rattus norvegicus', 500, 300, 200, 100]);
 
-    dataTable.addRow(['Human', 9606, 1000, 500, 400, 300]);
-    dataTable.addRow(['Mouse', 10090, 1400, 1000, 800, 700]);
-    dataTable.addRow(['Rat', 10116, 500, 300, 200, 100]);
+    $.getJSON('/pride/ws/proteomes/stats/summary', function(statsData) {
+        if (logging) {
+            console.log("Statistics data retrieved from web service:");
+        }
+        // add rows
+        for(var propt in statsData.datasetStatistics){
+            var data = statsData.datasetStatistics[propt];
+            if (logging) {
+                console.log(
+                      "species:" + data.speciesName
+                    + " taxid:" + data.taxid
+                    + " proteins:" + data.proteinCount
+                    + " peptiforms:" + data.peptiformCount
+                    + " upGroups:" + data.upGroupCount
+                    + " geneGroups:" + data.geneGroupCount);
+            }
+            // taxid == 1 is 'All species', which we want to exclude here
+            if (data.taxid != 1) {
+                dataTable.addRow([
+                    data.speciesName,
+                    data.taxid,
+                    data.peptiformCount,
+                    data.proteinCount,
+                    data.upGroupCount,
+                    data.geneGroupCount
+                ]);
+            }
+        }
+    });
 
+    // test data
+    //dataTable.addRow(['Human', 9606, 10000, 500, 400, 300]);
+    //dataTable.addRow(['Mouse', 10090, 14000, 1000, 800, 700]);
+    //dataTable.addRow(['Rat', 10116, 5000, 300, 200, 100]);
 
 
     var dataview = new google.visualization.DataView(dataTable);
     dataview.hideColumns([1]);
-
-
-    // Set bar chart options
-    var materialOptions = {
-        chart: { title: "Browse PRIDE Proteome's data" },
-        width: 800,
-        height: 250,
-        vAxis: { title: '',
-                 textStyle: {color: 'black'}
-               },
-        hAxis: { format: '###,###',
-                 textStyle: {color: 'black'}
-               },
-        legend: {textStyle: {color: 'black'}
-                },
-        titleTextStyle: {color: 'black'},
-        colors: ['#B2D1FF', '#FF9999', '#FFE680', '#99EBC2'],
-        bars: 'horizontal'
-    };
-    var options = {
-        width: 900,
-        height: 400
-    };
 
     dataBarChart = new google.charts.Bar(document.getElementById('bar_chart'));
     //dataBarChart = new google.visualization.BarChart(document.getElementById('bar_chart'));
@@ -110,7 +133,7 @@ function drawCharts2() {
 
 
     dataBarChart.draw(dataview, google.charts.Bar.convertOptions(materialOptions));
-    //dataBarChart.draw(dataview, options);
+    //dataBarChart.draw(dataview, materialOptions);
 
 }
 
