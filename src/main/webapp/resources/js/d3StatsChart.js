@@ -45,6 +45,18 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
         }
         return max;
     }
+    function findMin(dataset) {
+        var min = dataset.series[0].values[0];
+        for (var j=0; j<dataset.series.length; j++) {
+            for (var i=0; i<dataset.labels.length; i++) {
+                var x = dataset.series[j].values[i];
+                if (x < min && x > 0){ // exclude negative values and 0 (e.g. if no real data is available)
+                    min = dataset.series[j].values[i];
+                }
+            }
+        }
+        return min;
+    }
     function numBars(dataset) {
         var cnt = 0;
         for (var i=0; i<dataset.series.length; i++) {
@@ -59,29 +71,38 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
             }
         }
     }
+    function calcXScaleOffset(minValue) {
+        var x = Math.floor(Math.log10(minValue));
+        return Math.pow(10, x);
+    }
 
     var maxDataValue = findMax(data);
+    var minDataValue = findMin(data);
+    var xScaleOffset = calcXScaleOffset(minDataValue);
+
+
 // Set up the scales
     // Color scale
     var color = d3.scale.ordinal().range(["#6b486b", "#7b6888", "#8a89a6", "#98abc5"]);
     // scale for x values
     //var xScale = d3.scale.linear()
     var xScale = d3.scale.log()
-        .domain([1, maxDataValue])
+        .domain([xScaleOffset, maxDataValue])
         .range([0, chartWidth]);
 
     var xAxis = d3.svg.axis()
         .scale(xScale)
         .orient("bottom")
-        .ticks(10, ",.1s");
+        .ticks(10, ",.1s"); // for log scale
 
 // Create the chart
 
-    // Create the chart area where the HTML element with class 'chart' is
+    // Create the chart area in the HTML placeholder element
     var chart = d3.select(selector)
         .attr("width", spaceForLabels + chartWidth + spaceForLegend)
         .attr("height", chartHeight+axisPadding);
 
+    // remove the loading placeholder if there is one
     chart.selectAll("#loading_placeholder").remove();
 
 
