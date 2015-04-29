@@ -72,8 +72,7 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
         }
     }
     function calcXScaleOffset(minValue) {
-        var x = Math.floor(Math.log10(minValue));
-        return Math.pow(10, x);
+        return Math.pow(10, Math.floor(Math.log10(minValue)));
     }
 
     var maxDataValue = findMax(data);
