@@ -5,18 +5,22 @@
         "cssList": [
             {
                 "url": "${deploy.url}resources/css/proteomes.css"
+            },
+            {
+                "url": "${deploy.url}resources/css/d3StatsChart.css"
             }
         ],
         "javascriptList": [
             {
-                "url": "https://www.google.com/jsapi"
-            },
-            {
                 "url": "http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
             },
             {
-                "url": "${deploy.url}resources/js/stats.js"
+                "url": "http://d3js.org/d3.v3.min.js"
+            },
+            {
+                "url": "${deploy.url}resources/js/d3StatsChart.js"
             }
+
         ] ,
         "bottomJavascriptList": [
             {

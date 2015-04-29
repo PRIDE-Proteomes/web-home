@@ -18,8 +18,46 @@
         </p>
     </section>
 
-    <section id="chart" class="grid_24 clearfix">
-        <div class="grid_22 push_1" id="bar_chart"></div>
+    <section id="stats_chart" class="grid_22 prefix_1">
+        <svg class="d3_stats_chart">
+            <text id="loading_placeholder" x="50" y="30">Loading data...</text>
+        </svg>
+        <script>
+
+                var data = {
+                    labels: ['peptiforms', 'proteins', 'UniProt Entry groups', 'Gene groups'],
+                    series: []
+                };
+
+                $.getJSON('/pride/ws/proteomes/stats/summary', function (statsData) {
+                    fillDataset(data, statsData);
+
+                    // draw the chart with
+                    // - the data (data structure as defined above)
+                    // - the total height of the graphic
+                    // - the total width of the graphic (including space for labels and legend)
+                    // - the space for labels (if not present or 0, no labels)
+                    // - the space for the legend (if not present or 0, no legend)
+                    drawBarChart(".d3_stats_chart", data, 350, 700, 130, 160);
+                });
+
+                function fillDataset(dataset, dataToParse) {
+                    for (var i in dataToParse.datasetStatistics) {
+                        var data = dataToParse.datasetStatistics[i];
+                        // taxid == 1 is 'All species', which we want to exclude here
+                        if (data.taxid != 1) {
+                            dataset.series.push({
+                                label: data.commonName,
+                                name: data.scientificName,
+                                taxid: data.taxid,
+                                values: [data.peptiformCount, data.proteinCount, data.upGroupCount, data.geneGroupCount]
+                            });
+                        }
+                    }
+                }
+
+        </script>
+
     </section>
 
     <section id="chart_desc" class="grid_22 prefix_1">
@@ -30,7 +68,7 @@
             or searching for a protein, gene or keyword to find peptiforms that support this
             identification. Therefore the Proteomes search is based on peptiforms. However,
             it is also possible to list/browse the proteins, UniProt entry groups or genes
-            of the resource via simple browse pages. The interactive chart below can be used
+            of the resource via simple browse pages. The interactive chart above can be used
             to quickly jump into the data. A click on any of the bars in the chart will link
             to the species browse pages, whereas a click on any legend item will redirect to
             the species independent alternative.
