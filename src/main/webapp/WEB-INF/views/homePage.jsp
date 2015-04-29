@@ -16,7 +16,7 @@
         observed in public mass spectrometry datasets. It tries to evaluate
         and aggregate peptide identifications across several public datasets
         and generate a global picture of the available data.
-        <br/>
+        <br/><br/>
     </p>
 </section>
 
@@ -47,38 +47,62 @@
     </div>
 </section>
 
-<div class="grid_24">
+<div id="bottom" class="grid_24">
     <br/><br/> <%-- spacer to separate the previous from the next section --%>
 </div>
 
 <section class="grid_24">
     <section class="grid_8 alpha">
         <h3 class="icon icon-functional" data-icon="4">
-            Data Browsing
+            Data Origin
         </h3>
-        <spring:url var="browseUrl" value="/browse"/>
         <p class="text-para">
-            Please see the <a href="${browseUrl}">Browse</a> page
-            for a summary of the data and entry to data views.
+            Proteomes base data are <b>peptiforms</b>. These are aggregations of peptide
+            identifications (PSMs) reported in datasets submitted to <b>PRIDE Achive</b>.
+            This aggregation also involves a quality control pipeline that attempts to
+            filter out unreliable or inconclusive identifications.
+        </p>
+        <p class="text-para">
+            These peptiforms are then mapped onto the reference proteomes of selected
+            species from UniProt in order to maintain an up-to-date picture of the
+            identified proteins and genes.
         </p>
     </section>
     <section class="grid_8">
         <h3 class="icon icon-functional" data-icon="4">
-            Documentation
+            Data Updates
         </h3>
         <p class="text-para">
-            PRIDE Proteomes features extensive
-            <a href="/pride/help/proteomes">documentation pages</a>
-            explaining various aspects of the project.
+            Proteomes is not updated continuously, but on a regular release basis roughly
+            following new releases from UniProt.
+        </p>
+        <p class="text-para">
+            Currently only a few <b>species</b> are supported, but plans exist
+            to expand this list over time. Which species will be supported will depend on
+            the available identification data, proteome datasets and the demand for it from
+            the community. If you want a specific species to be added, please don't hesitate to
+            <a href="mailto:pride-support@ebi.ac.uk?Subject=PRIDE%20Proteomes%20species%20request">
+                contact us
+            </a> with your request.
         </p>
     </section>
     <section class="grid_8 omega">
         <h3 class="icon icon-functional" data-icon="4">
-            Web Service
+            Data Access
         </h3>
         <p class="text-para">
-            The data in PRIDE Proteomes is accessible via a
-            <a href="/pride/ws/proteomes">RESTful web service</a>.
+            There are two main ways to access the data, this <b>web interface</b> and
+            a <b>web service</b>.
+        </p>
+        <p class="text-para">
+            The web interface features search, browse and viewing functionalities and
+            generates detailed links so search results and detailed views are bookmarkable
+            and shareable between multiple parties.
+        </p>
+        <p class="text-para">
+            The <a href="/pride/ws/proteomes">RESTful web service</a> provides programmatic
+            access and data retrieval services. It follows state of the art technologies and
+            comes with an extensive interactive documentation.
         </p>
     </section>
 </section>
