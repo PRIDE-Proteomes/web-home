@@ -75,6 +75,7 @@
                             <port>9092</port>
                         </connector>
                     </connectors>
+                    <stopPort>19092</stopPort>
                 </configuration>
             </plugin>
         </plugins>
