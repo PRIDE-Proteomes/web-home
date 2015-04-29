@@ -17,8 +17,8 @@
 
     <!-- To build this project properties are needed:
             proteomes-solr-cores        // define Solr cores for the search
-            wgc-template-service-prod   // define the EBI web template service
             proteomes-deploy-url        // define the deployment URL of the service (to control rendered links)
+            wgc-template-service-prod   // define the EBI web template service
          Example build command:
             mvn -P proteomes-solr-cores,wgc-template-service-prod,proteomes-deploy-url package
      -->
