@@ -76,13 +76,14 @@
         <p class="text-para">
             Proteomes is not updated continuously, but on a regular release basis roughly
             following new releases from UniProt.<br/>
-            Currently only a few <b>species</b> are supported, but plans exist
+            Currently only a few model <b>organisms</b> are supported, but plans exist
             to expand this list over time. Which species will be supported will depend on
             the available identification data, proteome datasets and the demand for it from
-            the community. If you want a specific species to be added, please don't hesitate to
+            the community. If you want a specific species to be added, please don't hesitate
+            to send us your
             <a href="mailto:pride-support@ebi.ac.uk?Subject=PRIDE%20Proteomes%20species%20request">
-                contact us
-            </a> with your request.
+                request
+            </a>.
         </p>
     </section>
     <section class="grid_8 omega">
