@@ -3,7 +3,7 @@
 
 function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) {
 
-    // ToDo: tooltips
+    // ToDo: tooltips (may include coordinate extraction + translation!)
     // ToDo: try to put colors into CSS
     // ToDo: try to be flexible with dataset series length (currently switch case is hard coded)
 
@@ -163,8 +163,8 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
         var seriesId = d3.select(this.parentNode).attr("series");
         var labelId = d3.select(this).attr("dataType");
         var url = getUrl(labelId, seriesId);
-        console.log("url: " + url);
-        //window.location.assign(url);
+        //console.log("url: " + url);
+        window.location.assign(url);
     });
 
 
@@ -220,8 +220,8 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
     legend.on("click", function() {
         var labelId = d3.select(this).attr("label");
         var url = getUrl(labelId);
-        console.log(url);
-        //window.location.assign(url);
+        //console.log(url);
+        window.location.assign(url);
     });
 
     chart.append("g")
