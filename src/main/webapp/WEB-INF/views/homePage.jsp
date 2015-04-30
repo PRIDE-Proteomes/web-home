@@ -60,9 +60,10 @@
             Proteomes base data are <b>peptiforms</b>. These are aggregations of peptide
             identifications (PSMs) reported in datasets submitted to <b>PRIDE Achive</b>.
             This aggregation also involves a quality control pipeline that attempts to
-            filter out unreliable or inconclusive identifications.
-        </p>
-        <p class="text-para">
+            filter out unreliable or inconclusive identifications. At the moment this
+            relies on the spectra clustering and scoring approach (see
+            <a href="/pride/cluster">PRIDE Cluster</a>) which applies rather restrictive
+            criteria resulting in less, but more reliable data.<br/>
             These peptiforms are then mapped onto the reference proteomes of selected
             species from UniProt in order to maintain an up-to-date picture of the
             identified proteins and genes.
@@ -74,9 +75,7 @@
         </h3>
         <p class="text-para">
             Proteomes is not updated continuously, but on a regular release basis roughly
-            following new releases from UniProt.
-        </p>
-        <p class="text-para">
+            following new releases from UniProt.<br/>
             Currently only a few <b>species</b> are supported, but plans exist
             to expand this list over time. Which species will be supported will depend on
             the available identification data, proteome datasets and the demand for it from
@@ -92,14 +91,10 @@
         </h3>
         <p class="text-para">
             There are two main ways to access the data, this <b>web interface</b> and
-            a <b>web service</b>.
-        </p>
-        <p class="text-para">
+            a <b>web service</b>.<br/>
             The web interface features search, browse and viewing functionalities and
             generates detailed links so search results and detailed views are bookmarkable
-            and shareable between multiple parties.
-        </p>
-        <p class="text-para">
+            and shareable between multiple parties.<br/>
             The <a href="/pride/ws/proteomes">RESTful web service</a> provides programmatic
             access and data retrieval services. It follows state of the art technologies and
             comes with an extensive interactive documentation.
