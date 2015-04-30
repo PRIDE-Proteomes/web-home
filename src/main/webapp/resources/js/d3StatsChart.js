@@ -5,7 +5,6 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
 
     // ToDo: tooltips (may include coordinate extraction + translation!)
     // ToDo: try to put colors into CSS
-    // ToDo: try to be flexible with dataset series length (currently switch case is hard coded)
 
     var chartWidth       = 100,
         chartHeight      = 100,
@@ -232,48 +231,10 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
         });
 
     function getUrl(labelId, seriesId) {
-        var url = "/browse/";
-        switch (parseInt(labelId)) {
-            case 0 :
-                url +="peptiforms";
-                break;
-            case 1 :
-                url +="proteins";
-                break;
-            case 2 :
-                url +="upgroups";
-                break;
-            case 3 :
-                url +="genes";
-                break;
-            default : console.log("Unrecognised series: " + labelId);
-        }
+        var url = "/browse/" + data.urlPath[parseInt(labelId)];
         if (seriesId >= 0) {
-            url += getSpeciesPart(seriesId);
+            url += '?speciesFilter=' + data.series[parseInt(seriesId)].taxid;
         }
         return url;
-    }
-    function getSpeciesPart(seriesId) {
-        var speciesPart = '?speciesFilter=';
-        switch (parseInt(seriesId)) {
-            case 0 :
-                //speciesPart += "foo0";
-                speciesPart +="" + data.series[0].taxid;
-                break;
-            case 1 :
-                //speciesPart += "foo1";
-                speciesPart +="" + data.series[1].taxid;
-                break;
-            case 2 :
-                //speciesPart += "foo2";
-                speciesPart +="" + data.series[2].taxid;
-                break;
-            case 3 :
-                //speciesPart += "foo3";
-                speciesPart +="" + data.series[3].taxid;
-                break;
-            default : console.log("Unrecognised taxid");
-        }
-        return speciesPart;
     }
 }

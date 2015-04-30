@@ -26,6 +26,7 @@
 
                 var data = {
                     labels: ['peptiforms', 'proteins', 'UniProt Entry groups', 'Gene groups'],
+                    urlPath: ['peptiforms', 'proteins', 'upgroups', 'genes'],
                     series: []
                 };
 
