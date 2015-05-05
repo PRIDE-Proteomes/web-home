@@ -15,6 +15,8 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
         legendSpacing    = 4,
         axisPadding      = 30;
 
+    var numberOfBars = numBars(data);
+
     if (legendSpace > 0) {
         spaceForLegend = legendSpace;
     }
@@ -24,13 +26,18 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
     if (chartH > 0) {
         chartHeight = chartH;
     }
+    if (chartH == 'dynamic') {
+        chartHeight = numberOfBars * 13;
+    }
+    console.log("num bars:" + numberOfBars);
+    console.log("chart height:" + chartHeight);
     if (chartW > 0) {
         chartWidth = chartW - spaceForLabels - spaceForLegend;
     }
 
 
-    var barHeight       = (chartHeight- gapBetweenGroups * data.series.length) / numBars(data),
-        groupHeight      = barHeight * data.series.length;
+    var barHeight       = (chartHeight - gapBetweenGroups * data.series.length) / numberOfBars,
+        groupHeight      = barHeight * data.labels.length;
 
     // function that will return the max value of all values of all data series
     function findMax(dataset) {

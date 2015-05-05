@@ -39,7 +39,8 @@
                     // - the total width of the graphic (including space for labels and legend)
                     // - the space for labels (if not present or 0, no labels)
                     // - the space for the legend (if not present or 0, no legend)
-                    drawBarChart(".d3_stats_chart", data, 350, 700, 130, 160);
+//                    drawBarChart(".d3_stats_chart", data, 350, 700, 130, 160);
+                    drawBarChart(".d3_stats_chart", data, 'dynamic', 700, 130, 160);
                 });
 
                 function fillDataset(dataset, dataToParse) {
