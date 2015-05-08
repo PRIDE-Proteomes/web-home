@@ -22,6 +22,15 @@
         <svg class="d3_stats_chart">
             <text id="loading_placeholder" x="50" y="30">Loading data...</text>
         </svg>
+        <%-- define the layout of the tooltip that will be displayed when hovering over chart bars --%>
+        <div id="tooltip" class="hidden">
+            <p><strong><span id="dataType">dataType</span></strong></p>
+            <div id="details">
+                <p>With evidence: <span id="wEvi">x</span></p>
+                <p>Without evidence: <span id="woEvi">x</span></p>
+            </div>
+            <p>Total: <span id="value">x</span></p>
+        </div>
         <script>
 
                 var data = {
@@ -39,12 +48,12 @@
                     // - the total width of the graphic (including space for labels and legend)
                     // - the space for labels (if not present or 0, no labels)
                     // - the space for the legend (if not present or 0, no legend)
-//                    drawBarChart(".d3_stats_chart", data, 350, 700, 130, 160);
-                    drawBarChart(".d3_stats_chart", data, 'dynamic', 700, 130, 160);
+                    drawBarChart(".d3_stats_chart", data, 350, 700, 130, 160);
+//                    drawBarChart(".d3_stats_chart", data, 'dynamic', 700, 130, 160);
                 });
 
                 function fillDataset(dataset, dataToParse) {
-                    for (var i in dataToParse.datasetStatistics) {
+                    for (var i = 0; i < dataToParse.datasetStatistics.length; i++) {
                         var data = dataToParse.datasetStatistics[i];
                         // taxid == 1 is 'All species', which we want to exclude here
                         if (data.taxid != 1) {
@@ -52,7 +61,12 @@
                                 label: data.commonName,
                                 name: data.scientificName,
                                 taxid: data.taxid,
-                                values: [data.peptiformCount, data.proteinCount, data.upGroupCount, data.geneGroupCount]
+                                values: [
+                                    {counts: {total:data.peptiformCount, woevi:0}},
+                                    {counts: {total:data.proteinCount, woevi:Math.round(data.proteinCount * 0.3)}},
+                                    {counts: {total:data.upGroupCount, woevi:Math.round(data.upGroupCount * 0.3)}},
+                                    {counts: {total:data.geneGroupCount, woevi:Math.round(data.geneGroupCount * 0.3)}}
+                                ]
                             });
                         }
                     }
