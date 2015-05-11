@@ -40,10 +40,8 @@
     <%-- Title and count --%>
     <div id="result-count" class="grid_18 alpha clearfix">
         <h3>
-            <strong>${peptiformPage.totalElements}</strong> <fmt:message key="search.result.msg.part1"/>
-            <c:if test="${query!=''}">
-                <fmt:message key="search.result.msg.part2"/> <span class="searchterm" id="query">${query}</span>
-            </c:if>
+            <strong>${peptiformPage.totalElements}</strong> peptiform hit<c:if test="${peptiformPage.totalElements > 1}">s</c:if>
+            <c:if test="${query!=''}">for search term <span class="searchterm" id="query">${query}</span></c:if>
             <c:if test="${numFilters==1}"> (1 filter applied)</c:if>
             <c:if test="${numFilters>1}"> (${numFilters} filters applied)</c:if>
         </h3>
