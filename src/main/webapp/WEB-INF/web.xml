@@ -11,7 +11,7 @@
             WEB-INF/spring/mvc-config.xml
         </param-value>
 	</context-param>
-	
+
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -23,22 +23,23 @@
         <servlet-class>uk.ac.ebi.pride.web.util.servlet.proxy.ProxyServlet</servlet-class>
         <init-param>
             <param-name>proxyHost</param-name>
-            <!--<param-value>localhost</param-value>-->
-            <param-value>wwwdev.ebi.ac.uk</param-value>
+            <param-value>localhost</param-value>
+            <!--<param-value>wwwdev.ebi.ac.uk</param-value>-->
         </init-param>
         <init-param>
             <param-name>proxyPort</param-name>
-            <!--<param-value>9190</param-value>-->
-            <param-value>80</param-value>
+            <param-value>9190</param-value>
+            <!--<param-value>80</param-value>-->
         </init-param>
         <init-param>
             <param-name>proxyPath</param-name>
-            <param-value>/pride/ws</param-value>
+            <!--<param-value>/pride/ws</param-value>-->
+            <param-value>/</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>ProxyServletWS</servlet-name>
-        <url-pattern>/pride/ws/*</url-pattern>
+        <url-pattern>/pride/ws/proteomes/*</url-pattern>
     </servlet-mapping>
 
     <!-- proxy for ebisearch service calls /ebisearch -->
@@ -95,7 +96,7 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>

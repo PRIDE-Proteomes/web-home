@@ -56,7 +56,7 @@ a.selected {
     vertical-align: bottom;
     white-space: nowrap;
     /*background-color: #EEEEEE;*/
-    background-color: #b7dddd;
+    background-color: #bdc5ff;
     font-size: 100%;
     padding: 3px;
     margin-bottom: 1px;
@@ -106,7 +106,7 @@ a.selected {
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
-    background-color: #e0f4ec;
+    background-color: #dbe7ff;
     color: #4b4a4a;
     text-shadow: #ddf 1px 1px 0;
     font-weight: bold;
@@ -139,4 +139,50 @@ a.selected {
 
 .text-para {
     text-align: justify;
+}
+
+
+/* Table styles (similar to GWT widget table)
+*/
+thead.fixedHeader tr {
+    position: relative
+}
+
+html>body thead.fixedHeader tr {
+    display: block;
+    width: 100%;
+}
+
+html>body tbody.scrollContent {
+    display: block;
+    height: 250px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+th, td {
+    border: 0;
+    margin: 0;
+}
+
+.summary-table {
+    clear:both;
+    border: none;
+    margin: 0;
+    width: 100%;
+}
+
+.summary-table th {
+    border-bottom: 2px solid #6f7277;
+    padding:3px 8px;
+    text-align: left;
+    color: #4b4a4a;
+    text-shadow: #ddf 1px 1px 0;
+    overflow: hidden;
+    white-space: nowrap
+}
+
+.summary-table td {
+    padding:3px 5px;
+
 }
