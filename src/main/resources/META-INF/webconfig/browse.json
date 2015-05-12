@@ -7,6 +7,9 @@
                 "url": "${deploy.url}resources/css/proteomes.css"
             },
             {
+                "url": "${deploy.url}resources/css/pride-proteomes-colours.css"
+            },
+            {
                 "url": "${deploy.url}resources/css/d3StatsChart.css"
             }
         ],
