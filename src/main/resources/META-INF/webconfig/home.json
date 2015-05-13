@@ -21,6 +21,7 @@
     },
     "localMasthead": {
         "title": "PRIDE Proteomes",
+        "homepageUrl": "${deploy.url}",
         "search": {
             "btnText": "Search",
             "action": "${deploy.url}search",
