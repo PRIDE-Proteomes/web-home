@@ -56,7 +56,7 @@ a.selected {
     vertical-align: bottom;
     white-space: nowrap;
     /*background-color: #EEEEEE;*/
-    background-color: #bdc5ff;
+    background-color: #461746;
     font-size: 100%;
     padding: 3px;
     margin-bottom: 1px;
@@ -64,16 +64,19 @@ a.selected {
 }
 
 .col_pager div {
-    /*color: #487676;*/
-    /*color: white;*/
-    color: #4b4a4a;
-    text-shadow: #ddf 1px 1px 0;
+    /*color: #000000;*/
+    color: white;
+    /*color: #4b4a4a;*/
+    text-shadow: #29292f 1px 1px 0;
+    /*text-shadow: #ddf 1px 1px 0;*/
+
     font-weight: bold;
 }
 
 .col_pager a {
     padding: 2px 3px 0 3px;
     margin: 0 2px;
+    color: #000000;
     /*color: #487676;*/
     /*color: white;*/
     /*color: #4b4a4a;*/
@@ -85,6 +88,7 @@ a.selected {
 
 .col_pager a:link,
 .col_pager a:visited {
+    color: #daecff;
 }
 
 .col_pager a:hover,
@@ -107,7 +111,7 @@ a.selected {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     background-color: #dbe7ff;
-    color: #4b4a4a;
+    color: #000000;
     text-shadow: #ddf 1px 1px 0;
     font-weight: bold;
 }
@@ -176,8 +180,8 @@ th, td {
     border-bottom: 2px solid #6f7277;
     padding:3px 8px;
     text-align: left;
-    color: #4b4a4a;
-    text-shadow: #ddf 1px 1px 0;
+    color: #ffffff;
+    text-shadow: #29292f 1px 1px 0;
     overflow: hidden;
     white-space: nowrap
 }

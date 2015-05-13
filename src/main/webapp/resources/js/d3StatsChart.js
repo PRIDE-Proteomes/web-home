@@ -1,4 +1,4 @@
-function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) {
+function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace, contextPath) {
 
     // ToDo: tooltips (may include coordinate extraction + translation!)
     // ToDo: try to put colors into CSS
@@ -55,7 +55,8 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
                 if (x < min && x > 0){ // exclude negative values and 0 (e.g. if no real data is available)
                     min = x;
                 }
-                var y = dataset.series[j].values[i].counts.woevi;
+                var ty = dataset.series[j].values[i].counts.woevi;
+                var y = (x-ty);
                 if (y < min && y > 0){ // exclude negative values and 0 (e.g. if no real data is available)
                     min = y;
                 }
@@ -83,7 +84,10 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
 
     var maxDataValue = findMax(data);
     var minDataValue = findMin(data);
-    var xScaleOffset = calcXScaleOffset(minDataValue);
+    //var xScaleOffset = calcXScaleOffset(minDataValue);
+    var xScaleOffset = 0;
+    console.log("min:"+minDataValue);
+    console.log("cutoff:"+xScaleOffset);
 
 
 // Set up the scales
@@ -92,15 +96,15 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
     // Colour scale for stacked bar (entries without evidence)
     var color2 = d3.scale.ordinal().range(["#826382", "#988BA1", "#B3B3C4", "#C6D2E2"]);
     // scale for x values
-    //var xScale = d3.scale.linear()
-    var xScale = d3.scale.log()
+    var xScale = d3.scale.linear()
+    //var xScale = d3.scale.log()
         .domain([xScaleOffset, maxDataValue])
         .range([0, chartWidth]);
 
     var xAxis = d3.svg.axis()
         .scale(xScale)
-        .orient("bottom")
-        .ticks(10, ",.1s"); // for log scale (remove for linear scale)
+        .orient("bottom");
+        //.ticks(10, ",.1s"); // for log scale (remove for linear scale)
 
 // Create the chart
 
@@ -310,7 +314,7 @@ function drawBarChart (selector, data, chartH, chartW, labelSpace, legendSpace) 
         });
 
     function getUrl(labelId, seriesId) {
-        var url = "/browse/" + data.urlPath[parseInt(labelId)];
+        var url = contextPath + "/browse/" + data.urlPath[parseInt(labelId)];
         if (seriesId >= 0) {
             url += '?speciesFilter=' + data.series[parseInt(seriesId)].taxid;
         }

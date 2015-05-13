@@ -41,6 +41,7 @@
 
                 $.getJSON('/pride/ws/proteomes/stats/summary', function (statsData) {
                     fillDataset(data, statsData);
+                    console.log(data);
 
                     // draw the chart with
                     // - the data (data structure as defined above)
@@ -48,8 +49,8 @@
                     // - the total width of the graphic (including space for labels and legend)
                     // - the space for labels (if not present or 0, no labels)
                     // - the space for the legend (if not present or 0, no legend)
-                    drawBarChart(".d3_stats_chart", data, 350, 700, 130, 160);
-//                    drawBarChart(".d3_stats_chart", data, 'dynamic', 700, 130, 160);
+                    drawBarChart(".d3_stats_chart", data, 350, 950, 130, 160, "${pageContext.request.contextPath}");
+//                    drawBarChart(".d3_stats_chart", data, 'dynamic', 950, 200, 160);
                 });
 
                 function fillDataset(dataset, dataToParse) {
@@ -63,9 +64,9 @@
                                 taxid: data.taxid,
                                 values: [
                                     {counts: {total:data.peptiformCount, woevi:0}},
-                                    {counts: {total:data.proteinCount, woevi:Math.round(data.proteinCount * 0.3)}},
-                                    {counts: {total:data.upGroupCount, woevi:Math.round(data.upGroupCount * 0.3)}},
-                                    {counts: {total:data.geneGroupCount, woevi:Math.round(data.geneGroupCount * 0.3)}}
+                                    {counts: {total:data.totalProteinCount, woevi:(data.totalProteinCount-data.mappedProteinCount)}},
+                                    {counts: {total:data.totalUpGroupCount, woevi:(data.totalUpGroupCount-data.mappedUpGroupCount)}},
+                                    {counts: {total:data.totalGeneGroupCount, woevi:(data.totalGeneGroupCount-data.mappedGeneGroupCount)}}
                                 ]
                             });
                         }
