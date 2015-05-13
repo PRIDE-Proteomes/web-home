@@ -45,7 +45,7 @@
     <%-- Filters --%>
     <div class="grid_4 left-column">
       <h4>Filter results</h4>
-      <spring:url var="upgroupsUrl" value="/upgroups"/>
+      <spring:url var="upgroupsUrl" value="/browse/upgroups"/>
       <%-- ADD filter form --%>
       <form action="${upgroupsUrl}" method="get">
         <fieldset class="no-padding">
@@ -112,7 +112,7 @@
 
       <div id="search-result-table" class="grid_20 omega">
           <%-- Peptiform Table --%>
-        <customElement:paginator baseUrl="/upgroups" page="${facetPage}" query="" speciesFilters="${speciesFilters}"/>
+        <customElement:paginator baseUrl="/browse/upgroups" page="${facetPage}" query="" speciesFilters="${speciesFilters}"/>
         <table class="summary-table">
           <thead>
             <%-- ToDo: implement sort --%>
@@ -123,14 +123,14 @@
                   UniProt Entry accession
                 </c:when>
                 <c:otherwise>
-                  <customElement:sortUrl baseUrl="/upgroups" label="UniProt Entry accession" ps="${facetPage.size}" pn="${facetPage.number}" so="index:DESC" speciesFilter="${speciesFilters}"/>
+                  <customElement:sortUrl baseUrl="/browse/upgroups" label="UniProt Entry accession" ps="${facetPage.size}" pn="${facetPage.number}" so="index:DESC" speciesFilter="${speciesFilters}"/>
                 </c:otherwise>
               </c:choose>
             </th>
             <th>
               <c:choose>
                 <c:when test="${facetPage.sort != null && fn:contains(facetPage.sort, 'index') }">
-                  <customElement:sortUrl baseUrl="/upgroups" label="# Peptiforms" ps="${facetPage.size}" pn="${facetPage.number}" so="" speciesFilter="${speciesFilters}"/>
+                  <customElement:sortUrl baseUrl="/browse/upgroups" label="# Peptiforms" ps="${facetPage.size}" pn="${facetPage.number}" so="" speciesFilter="${speciesFilters}"/>
                 </c:when>
                 <c:otherwise>
                   # Peptiforms
@@ -155,7 +155,7 @@
           </c:forEach>
           </tbody>
         </table>
-        <customElement:paginator baseUrl="/upgroups" page="${facetPage}" query="" speciesFilters="${speciesFilters}"/>
+        <customElement:paginator baseUrl="/browse/upgroups" page="${facetPage}" query="" speciesFilters="${speciesFilters}"/>
 
       </div><%-- end of result table --%>
     </c:if><%-- end of list of peptiforms --%>
