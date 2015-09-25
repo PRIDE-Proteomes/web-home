@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import uk.ac.ebi.pride.proteomes.index.model.Peptiform;
 import uk.ac.ebi.pride.proteomes.index.model.SolrPeptiform;
 import uk.ac.ebi.pride.proteomes.index.service.ProteomesSearchService;
 import uk.ac.ebi.pride.proteomes.web.home.common.ProteomesController;
@@ -86,7 +85,7 @@ public class SearchController extends ProteomesController {
         // for now: hard coded sort order...
         Pageable page2 = new PageRequest(page.getPageNumber(), page.getPageSize(), Sort.Direction.ASC, SolrPeptiform.PEPTIFORM_SEQUENCE);
 
-        Page<Peptiform> resultPage = proteomesSearchService.findByQueryAndFilterTaxid(query, selectedSpeciesFilters, page2);
+        Page<SolrPeptiform> resultPage = proteomesSearchService.findByQueryAndFilterTaxid(query, selectedSpeciesFilters, page2);
 
         // push the results into the model
         model.addAttribute("peptiformPage", resultPage);
