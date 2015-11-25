@@ -34,8 +34,8 @@
         <script>
 
                 var data = {
-                    labels: ['peptiforms', 'proteins', 'UniProt Entry groups', 'Gene groups'],
-                    urlPath: ['peptiforms', 'proteins', 'upgroups', 'genes'],
+                    labels: ['peptiforms', 'proteins', 'Gene groups'],
+                    urlPath: ['peptiforms', 'proteins', 'genes'],
                     series: []
                 };
 
@@ -65,7 +65,6 @@
                                 values: [
                                     {counts: {total:data.peptiformCount, woevi:0}},
                                     {counts: {total:data.totalProteinCount, woevi:(data.totalProteinCount-data.mappedProteinCount)}},
-                                    {counts: {total:data.totalUpGroupCount, woevi:(data.totalUpGroupCount-data.mappedUpGroupCount)}},
                                     {counts: {total:data.totalGeneGroupCount, woevi:(data.totalGeneGroupCount-data.mappedGeneGroupCount)}}
                                 ]
                             });
