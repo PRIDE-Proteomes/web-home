@@ -39,12 +39,9 @@ public class SearchController extends ProteomesController {
 
     @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public String search(@RequestParam(value = "query", defaultValue = "")
-                             String query,
-                         @PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE)
-                         Pageable page,
-                         @RequestParam(value = "speciesFilter", defaultValue = "")
-                         int[] taxidFilter,
+    public String search(@RequestParam(value = "query", defaultValue = "") String query,
+                         @PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE) Pageable page,
+                         @RequestParam(value = "speciesFilter", defaultValue = "") int[] taxidFilter,
                          Model model) {
 
         // ToDo: one possibility to redirect if we detect a UP accession
@@ -55,10 +52,10 @@ public class SearchController extends ProteomesController {
         Matcher m = upPattern.matcher(query);
         if (m.matches()) {
             // looks like we have a UP accession as search term, now check if we have actual data for it
-            long numPeptiforms = proteomesSearchService.countByProtein(query);
+            long numPeptiforms = proteomesSearchService.countByProteinAccession(query);
             if (numPeptiforms > 0) {
                 // we have a record for this UP accession, so we can redirect to the detailed view
-                return "redirect:/viewer/#protein="+query;
+                return "redirect:/viewer/#protein=" + query;
             }
         }
 

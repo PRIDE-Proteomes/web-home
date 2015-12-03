@@ -27,7 +27,7 @@
     <context:component-scan base-package="uk.ac.ebi.pride.proteomes.web.home.browse.controller" />
 
     <!-- property files -->
-    <context:property-placeholder location="classpath:META-INF/props/web.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:META-INF/prop/web.properties" ignore-unresolvable="true"/>
 
     <resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
 

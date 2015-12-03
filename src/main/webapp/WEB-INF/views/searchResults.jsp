@@ -156,7 +156,7 @@
                             Protein(s)
                         </th>
                         <th>
-                            UniProt Entry Groups(s)
+                            Gene Groups(s)
                         </th>
                     </tr>
                     </thead>
@@ -170,7 +170,8 @@
                                     ${peptiformFacet.sequence}
                             </td>
                             <td>
-                                <c:forEach var="modi" items="${peptiformFacet.mods}">
+                                <%--It is a reserved word un EL It can't be call like peptiformFacet.mod--%>
+                                <c:forEach var="modi" items="${peptiformFacet['mod']}">
                                     ${modi}
                                 </c:forEach>
                             </td>
@@ -178,7 +179,7 @@
                                     ${peptiformFacet.species}
                             </td>
                             <td>
-                                <c:forEach var="protein" items="${peptiformFacet.proteins}">
+                                <c:forEach var="protein" items="${peptiformFacet.proteinAccession}">
                                     <spring:url var="showUrlPeptide" value="/viewer/#protein={protein_accession}&peptide={peptide_sequence}">
                                         <spring:param name="protein_accession" value="${protein}" />
                                         <spring:param name="peptide_sequence" value="${peptiformFacet.sequence}" />
@@ -187,11 +188,11 @@
                                 </c:forEach>
                             </td>
                             <td>
-                                <c:forEach var="upGroup" items="${peptiformFacet.upGroups}">
+                                <c:forEach var="ggroup" items="${peptiformFacet.geneGroup}">
                                     <spring:url var="showUrlPeptide" value="/viewer/#group={group}">
-                                        <spring:param name="group" value="${upGroup}" />
+                                        <spring:param name="group" value="${ggroup}" />
                                     </spring:url>
-                                    <a href="${showUrlPeptide}">${upGroup}</a>
+                                    <a href="${showUrlPeptide}">${ggroup}</a>
                                 </c:forEach>
                             </td>
                         </tr>

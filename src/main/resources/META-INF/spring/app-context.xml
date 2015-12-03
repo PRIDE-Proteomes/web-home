@@ -7,10 +7,6 @@
                            http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr-1.0.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <!-- property files -->
-    <context:property-placeholder location="classpath:META-INF/props/solr.properties" ignore-unresolvable="true"/>
-
-
     <!-- scan for Solr based services -->
     <context:component-scan base-package="uk.ac.ebi.pride.proteomes.index.service"/>
     <!-- scan for Solr repositories -->
@@ -22,6 +18,19 @@
 
     <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
         <constructor-arg name="solrServer" ref="proteomesSolrServer"/>
+    </bean>
+
+    <!-- Set up or detect a System property called "INDEX_ENVIRONMENT" used to construct a properties file on the classpath.  The default is "dev".  -->
+    <bean id="indexEnvironment"
+          class="org.springframework.batch.support.SystemPropertyInitializer">
+        <property name="defaultValue" value="dev"/>
+        <property name="keyName" value="INDEX_ENVIRONMENT"/>
+    </bean>
+
+    <bean id="indexPlaceholderProperties" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer" depends-on="indexEnvironment">
+        <property name="location" value="classpath:META-INF/prop/solr/pride-proteomes-solr-${INDEX_ENVIRONMENT}.properties"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="order" value="1"/>
     </bean>
 
 </beans>

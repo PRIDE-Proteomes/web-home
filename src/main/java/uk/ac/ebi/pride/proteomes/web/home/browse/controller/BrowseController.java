@@ -45,12 +45,9 @@ public class BrowseController extends ProteomesController {
 
     @RequestMapping(value = {"/browse/peptiforms"}, method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public String search(@RequestParam(value = "query", defaultValue = "")
-                         String query,
-                         @PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE)
-                         Pageable page,
-                         @RequestParam(value = "speciesFilter", defaultValue = "")
-                         int[] taxidFilter,
+    public String search(@RequestParam(value = "query", defaultValue = "") String query,
+                         @PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE) Pageable page,
+                         @RequestParam(value = "speciesFilter", defaultValue = "") int[] taxidFilter,
                          Model model) {
 
         // do the same as the search (which is based on peptiforms)
@@ -59,10 +56,8 @@ public class BrowseController extends ProteomesController {
 
     @RequestMapping(value = {"/browse/proteins"}, method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public String proteinBrowser(@PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE)
-                                 Pageable page,
-                                 @RequestParam(value = "speciesFilter", defaultValue = "")
-                                 int[] taxidFilter,
+    public String proteinBrowser(@PageableDefault(page = PAGE_NUMBER, value = PAGE_SIZE) Pageable page,
+                                 @RequestParam(value = "speciesFilter", defaultValue = "") int[] taxidFilter,
                                  Model model) {
 
         Set<Integer> selectedSpeciesFilters = null;
