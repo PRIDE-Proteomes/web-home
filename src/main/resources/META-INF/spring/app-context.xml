@@ -12,12 +12,12 @@
     <!-- scan for Solr repositories -->
     <solr:repositories base-package="uk.ac.ebi.pride.proteomes.index.repository"/>
 
-    <bean id="proteomesSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+    <bean id="proteomesSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrClient">
         <constructor-arg name="baseURL" value="${solr.server.proteomes.peptiform.core.url}" />
     </bean>
 
     <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
-        <constructor-arg name="solrServer" ref="proteomesSolrServer"/>
+        <constructor-arg name="solrClient" ref="proteomesSolrServer"/>
     </bean>
 
     <!-- Set up or detect a System property called "INDEX_ENVIRONMENT" used to construct a properties file on the classpath.  The default is "dev".  -->
