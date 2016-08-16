@@ -60,6 +60,12 @@
                 "title": "Browse",
                 "href": "${deploy.url}browse",
                 "tooltip": "Browse PRIDE Proteomes data"
+            },
+            {
+                "selected": false,
+                "title": "Release",
+                "href": "${deploy.url}release",
+                "tooltip": "Latest PRIDE Proteomes release information"
             }
         ],
         "functionalTabs": [

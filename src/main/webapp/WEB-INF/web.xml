@@ -17,6 +17,24 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+    <!--Force UTF-8 encoding-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!-- RESTful WS PROXY Configuration -->
     <servlet> <!-- proxy for PRIDE web service calls /pride/ws -->
         <servlet-name>ProxyServletWS</servlet-name>
@@ -131,4 +149,12 @@
         <url-pattern>/browse/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>releaseFrontierTemplateFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>releaseFrontierTemplateFilter</filter-name>
+        <url-pattern>/release/*</url-pattern>
+    </filter-mapping>
 </web-app>

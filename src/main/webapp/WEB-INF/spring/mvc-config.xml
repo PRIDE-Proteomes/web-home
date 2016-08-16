@@ -25,6 +25,7 @@
     <context:component-scan base-package="uk.ac.ebi.pride.proteomes.web.home.welcome.controller" />
     <context:component-scan base-package="uk.ac.ebi.pride.proteomes.web.home.search.controller" />
     <context:component-scan base-package="uk.ac.ebi.pride.proteomes.web.home.browse.controller" />
+    <context:component-scan base-package="uk.ac.ebi.pride.proteomes.web.home.release.controller" />
 
     <!-- property files -->
     <context:property-placeholder location="classpath:META-INF/prop/web.properties" ignore-unresolvable="true"/>
@@ -68,6 +69,17 @@
     <beans:bean id="browseFrontierTemplateFilter" class="uk.ac.ebi.pride.web.util.frontier.CustomizedFrontierTemplateFilter">
         <beans:property name="templateServiceAddress" value="${frontier.template.service.url}"/>
         <beans:property name="jsonConfig" value="classpath:META-INF/webconfig/browse.json"/>
+        <beans:property name="exceptions">
+            <beans:list>
+                <beans:value>/resources/</beans:value>
+                <beans:value>/statistics</beans:value>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="releaseFrontierTemplateFilter" class="uk.ac.ebi.pride.web.util.frontier.CustomizedFrontierTemplateFilter">
+        <beans:property name="templateServiceAddress" value="${frontier.template.service.url}"/>
+        <beans:property name="jsonConfig" value="classpath:META-INF/webconfig/release.json"/>
         <beans:property name="exceptions">
             <beans:list>
                 <beans:value>/resources/</beans:value>

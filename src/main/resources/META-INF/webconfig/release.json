@@ -1,0 +1,86 @@
+{
+  "globalTemplate": {
+    "title": "Proteomes < PRIDE",
+    "bodyMaxWidth": 1012,
+    "cssList": [
+      {
+        "url": "${deploy.url}resources/css/proteomes.css"
+      },
+      {
+        "url": "${deploy.url}resources/css/pride-proteomes-colours.css"
+      }
+    ],
+    "javascriptList": [
+      {
+        "url": "https://www.gstatic.com/charts/loader.js"
+      }
+    ],
+    "breadcrumbItems": [
+      {
+        "title": "PRIDE",
+        "href": "http://www.ebi.ac.uk/pride"
+      },
+      {
+        "title": "PRIDE Proteomes"
+      }
+    ]
+  },
+  "localMasthead": {
+    "title": "PRIDE Proteomes",
+    "homepageUrl": "${deploy.url}",
+    "search": {
+      "btnText": "Search",
+      "action": "${deploy.url}search",
+      "method": "get",
+      "inputName": "query",
+      "examples": [
+        {
+          "title": "P02787",
+          "href": "${deploy.url}search?query=P02787"
+        },
+        {
+          "title": "P02768",
+          "href": "${deploy.url}search?query=P02768"
+        },
+        {
+          "title": "P35579",
+          "href": "${deploy.url}search?query=P35579"
+        }
+      ]
+    },
+    "navigationTabs": [
+      {
+        "selected": false,
+        "title": "Home",
+        "href": "${deploy.url}",
+        "tooltip": "Home page"
+      },
+      {
+        "selected": false,
+        "title": "Search",
+        "href": "${deploy.url}search",
+        "tooltip": "Search peptiforms in PRIDE Proteomes"
+      },
+      {
+        "selected": false,
+        "title": "Browse",
+        "href": "${deploy.url}browse",
+        "tooltip": "Browse PRIDE Proteomes data"
+      },
+      {
+        "selected": true,
+        "title": "Release",
+        "href": "${deploy.url}release",
+        "tooltip": "Latest PRIDE Proteomes release information"
+      }
+    ],
+    "functionalTabs": [
+      {
+        "title": "Feedback",
+        "href": "/support/pride",
+        "iconFontSet": "icon-static",
+        "dataIcon": "\\"
+      }
+    ]
+  }
+}
