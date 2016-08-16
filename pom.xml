@@ -96,23 +96,43 @@
                 </configuration>
             </plugin>
 
+            <!-- maven-jetty-plugin -->
+            <!-- generate the keystore with the following command for https to work in jetty -->
+            <!-- keytool -genkey -alias jetty6 -keyalg RSA -keystore src/test/resources/jetty-ssl.keystore -storepass jetty6 -keypass jetty6 -dname "CN=PRIDE Archive" -->
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.26</version>
                 <configuration>
                     <webAppConfig>
-                        <!-- Note: the local deployment path has to be / or the proxy servlets won't work properly -->
-                        <!--Example http://localhost:9092/search?query=P12345-->
-                        <contextPath>/</contextPath>
+                        <contextPath>/pride/proteomes</contextPath>
                     </webAppConfig>
                     <connectors>
                         <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
                             <port>9092</port>
                         </connector>
+                        <connector implementation="org.mortbay.jetty.security.SslSocketConnector">
+                            <port>8443</port>
+                            <keystore>src/test/resources/jetty-ssl.keystore</keystore>
+                            <keyPassword>jetty6</keyPassword>
+                            <password>jetty6</password>
+                        </connector>
                     </connectors>
-                    <stopPort>19092</stopPort>
+                    <jettyConfig>${basedir}/jetty.xml</jettyConfig>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.oracle</groupId>
+                        <artifactId>oracle-thin</artifactId>
+                        <version>11.2.0.1.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>commons-dbcp</groupId>
+                        <artifactId>commons-dbcp</artifactId>
+                        <version>1.2.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
 
@@ -124,7 +144,12 @@
             <groupId>uk.ac.ebi.pride.proteomes.index</groupId>
             <artifactId>proteomes-index-service</artifactId>
             <version>${proteomes.index.service.version}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>uk.ac.ebi.pride.proteomes.web</groupId>
+            <artifactId>proteomes-web-service-client</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <!-- PRIDE web utilities (ProxyServlet) -->
@@ -140,6 +165,10 @@
                 <exclusion>
                     <groupId>org.springframework.social</groupId>
                     <artifactId>spring-social-twitter</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpclient</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
